@@ -10,6 +10,7 @@
   --font-clr: rgb(0, 0, 0);
   --font-size: 16px;
   --menu-background: none; /* none, or choose a color */
+  --box-shadow: 0 0 20px -10px;
 }
 
 
@@ -65,4 +66,5 @@ canvas {
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
+  box-shadow: var(--box-shadow);
 }

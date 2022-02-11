@@ -3,10 +3,7 @@ function setup() {
 }
 
 function draw() {
-  background(220);
-  textSize(20);
-  textAlign(CENTER)
-  text("Fullscreen responsive sketch", width/2, height/2)
+  background(200);
 }
 
 function windowResized() {
