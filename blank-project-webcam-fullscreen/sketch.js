@@ -13,10 +13,14 @@ function draw() {
   background(0);
 
   push();
-    const vidScale = innerWidth/w;
-    const yTranslate = (innerHeight-h)/2
+    let vidScale;
+    if(innerWidth >= innerHeight) {
+      vidScale = innerWidth/w;
+    } else {
+      vidScale = innerHeight/h;
+    }
     scale(vidScale, vidScale);
-    translate(w, yTranslate);
+    translate(w, 0);
     scale(-1, 1);
     image(capture, 0, 0);
   pop();
