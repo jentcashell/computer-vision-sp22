@@ -13,6 +13,8 @@ function draw() {
   background(200);
 
   capture.loadPixels();
+
+  // don't start capturing pixel data until the webcam has initialized
   if(capture.pixels.length > 0)
   {
     for(let y = 0; y < h; y++) {
