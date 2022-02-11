@@ -1,43 +1,62 @@
+/* 
+  The style.css file is where you change the style of your web page.
+  The things you change here will not affect your p5.js sketch
+*/
+
+/* Change your menu parameters here */
+
+:root {
+  --menu-display: flex; /* change this to 'none' to hide the top bar */
+  --font-clr: rgb(0, 0, 0);
+  --font-size: 16px;
+  --menu-background: none; /* none, or choose a color */
+}
+
+
+
+
+
+
+/*------------------------------------------------------*/
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-:root {
-  --clr-font: rgb(255, 255, 255); /* sets the font color of your top bar menu */
-}
 
 body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
 header {
+  background: var(--menu-background);
   padding: .5em;
-  display: flex; /* change this to 'none' to hide the top bar */
+  display: var(--menu-display); /* change this to 'none' to hide the top bar */
   justify-content: space-between;
   align-items: center;
   position: fixed;
   z-index: 2;
-  width: 100vw;
   top: 0;
   left: 0;
+  right: 0;
 }
 
 h1 {
-  font-size: .75rem;
-  color: var(--clr-font);
+  font-size: var(--font-size);
+  color: var(--font-clr);
 }
 
 a {
-  color: var(--clr-font);
+  color: var(--font-clr);
   text-decoration: none;
-  font-size: .75rem;
+  font-size: var(--font-size);
   font-weight: bold;
 }
 
 a:hover {
-  color: gray;
+  filter: invert();
 }
 
 canvas {
@@ -46,5 +65,4 @@ canvas {
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
-  box-shadow: 0 10px 20px -12px;
 }
