@@ -3,6 +3,8 @@ let h = 480;
 let capture;
 let model;
 let faces;
+let prevFaces;
+const easeRate = 0.5;
 
 function setup() {
   createCanvas(w, h);
@@ -73,6 +75,7 @@ function draw() {
         }
       }
     }
+    prevFaces = faces;
   }
 }
 
