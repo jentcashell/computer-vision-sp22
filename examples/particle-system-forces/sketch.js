@@ -16,9 +16,25 @@ function setup() {
 }
 
 function draw() {
-  background(0);
+  background(200);
+
+  const mousePos = createVector(mouseX, mouseY);
+  let forceScaler = -50;
+
+  if(mouseIsPressed){
+    forceScaler = -forceScaler/4;
+  }
 
   for(const p of particles) {
+
+
+    const d = dist(mousePos.x, mousePos.y, p.pos.x, p.pos.y);
+    const magnitude = forceScaler / (d+5);
+    let forceDirection = p.pos.sub(mousePos);
+    forceDirection.normalize();
+    const newForce = forceDirection.mult(magnitude);
+    p.force.add(newForce);
+
     p.update();
     p.draw();
   }
@@ -29,21 +45,23 @@ class Particle {
 
   constructor() {
     this.pos = createVector(width/2, height/2);
-    this.vel = createVector(random(-3, 3), random(-3, 3));
-    this.acc = createVector(random(-0.01, 0.01), random(-0.01, 0.01));
-    this.size = 10;
+    this.vel = createVector(random(-10, 10), random(-10, 10));
+    this.size = 20;
     this.color = color(random(255), random(255), random(255));
+
+    this.drag = 0.98;
+    this.force = createVector(0, 0);
   }
 
   update() {
-    this.vel.add(this.acc);
+    this.vel.add(this.force);
+    this.vel.mult(this.drag);
     this.pos.add(this.vel);
-    this.checkWalls();
   }
 
   draw() {
     fill(this.color);
-    image(pImg, this.pos.x, this.pos.y, this.size, this.size);
+    ellipse(this.pos.x, this.pos.y, this.size, this.size);
   }
 
   checkWalls() {
