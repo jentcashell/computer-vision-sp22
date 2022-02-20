@@ -119,7 +119,7 @@ async function getFaces() {
         input: document.querySelector("video"),
         returnTensors: false,
         flipHorizontal: true,
-        predictIrises: true // set to 'false' if sketch is running too slowly
+        predictIrises: false // set to 'false' if sketch is running too slowly
     })
 
     if (predictions.length === 0) {
