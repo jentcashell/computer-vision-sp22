@@ -18,7 +18,7 @@ function setup() {
 
     loadFaceModel();
 
-    colorMode(HSB, 259);
+    colorMode(HSB, 255);
 }
 
 
@@ -34,11 +34,18 @@ function draw() {
         image(capture, 0, 0);
     pop();
 
+    noStroke();
     if(faces !== undefined) {
-        
         for(const f of faces) {
 
-            drawEyes(f);
+            let h = 0;
+            for(const kp of f.scaledMesh) {
+                
+                const hue = map(h, 0, f.scaledMesh.length, 0, 255);
+                fill(hue, 255, 255);
+                ellipse(kp[0], kp[1], 2, 2);
+                h++;
+            }
             
         }
     }
@@ -112,7 +119,7 @@ async function getFaces() {
         input: document.querySelector("video"),
         returnTensors: false,
         flipHorizontal: true,
-        predictIrises: true
+        predictIrises: true // set to 'false' if sketch is running too slowly
     })
 
     if (predictions.length === 0) {
