@@ -1,7 +1,7 @@
 let w = 640;
 let h = 480;
 let capture;
-let threshold = 120; // lower threshold means letters will only stop on very dark spots
+let threshold = 80; // lower threshold means letters will only stop on very dark spots
 const fallRate = 2; // higher == faster letters
 let fallingLetters = [];
 
