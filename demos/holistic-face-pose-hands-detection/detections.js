@@ -5,7 +5,7 @@ let detections = undefined;
 const videoElement = document.getElementById('input_video');
 const imgElement = document.getElementById('input_image');
 
-const videoFeed = false; // set to false if using a still image
+const videoFeed = true; // set to false if using a still image
 
 function gotHolistic(results) {
 
