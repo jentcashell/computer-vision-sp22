@@ -65,18 +65,18 @@ function draw() {
             // use the built-in MediaPipe drawing functions
             drawConnectors(canvasCtx, detections.faceLandmarks, FACEMESH_TESSELATION,
                 { color: '#C0FFC070', lineWidth: 1 });
-            // drawConnectors(canvasCtx, detections.poseLandmarks, POSE_CONNECTIONS,
-            //     { color: '#00FF00', lineWidth: 3 });
-            // drawLandmarks(canvasCtx, detections.poseLandmarks,
-            //     { color: '#FF0000', lineWidth: 2 });
-            // drawConnectors(canvasCtx, detections.leftHandLandmarks, HAND_CONNECTIONS,
-            //     { color: '#CC0000', lineWidth: 2 });
-            // drawLandmarks(canvasCtx, detections.leftHandLandmarks,
-            //     { color: '#00FF00', lineWidth: 2 });
-            // drawConnectors(canvasCtx, detections.rightHandLandmarks, HAND_CONNECTIONS,
-            //     { color: '#00CC00', lineWidth: 2 });
-            // drawLandmarks(canvasCtx, detections.rightHandLandmarks,
-            //     { color: '#FF0000', lineWidth: 2 });
+            drawConnectors(canvasCtx, detections.poseLandmarks, POSE_CONNECTIONS,
+                { color: '#00FF00', lineWidth: 3 });
+            drawLandmarks(canvasCtx, detections.poseLandmarks,
+                { color: '#FF0000', lineWidth: 2 });
+            drawConnectors(canvasCtx, detections.leftHandLandmarks, HAND_CONNECTIONS,
+                { color: '#CC0000', lineWidth: 2 });
+            drawLandmarks(canvasCtx, detections.leftHandLandmarks,
+                { color: '#00FF00', lineWidth: 2 });
+            drawConnectors(canvasCtx, detections.rightHandLandmarks, HAND_CONNECTIONS,
+                { color: '#00CC00', lineWidth: 2 });
+            drawLandmarks(canvasCtx, detections.rightHandLandmarks,
+                { color: '#FF0000', lineWidth: 2 });
         }
 
     } else {
