@@ -1,5 +1,6 @@
 :root {
     --clr-primary: #020202;
+    --clr-hover: #66b;
     --clr-bg: #fdfdfd;
 }
 
@@ -15,12 +16,27 @@ body {
     margin: 0;
 }
 
+.sketches {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4em;
+}
+
 h1, h2, h3, h4, h5, h6 {
     margin: 0;
-    margin-bottom: 1em;
+    margin-bottom: .75em;
 }
 
 li {
     line-height: 1.25em;
     list-style-type: none;
+}
+
+a {
+    color: var(--clr-primary);
+    text-decoration: none;
+}
+
+a:hover {
+    color: var(--clr-hover);
 }
