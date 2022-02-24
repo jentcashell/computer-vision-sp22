@@ -1,38 +1,67 @@
-const videoElement = document.getElementsByClassName('input_video')[0];
-const canvasElement = document.getElementsByClassName('output_canvas')[0];
-const canvasCtx = canvasElement.getContext('2d');
+const w = 640;
+const h = 480;
+let capture;
 
-function onResults(results) {
-  canvasCtx.save();
-  canvasCtx.clearRect(0, 0, canvasElement.width, canvasElement.height);
-  canvasCtx.drawImage(
-      results.image, 0, 0, canvasElement.width, canvasElement.height);
-  if (results.multiHandLandmarks) {
-    for (const landmarks of results.multiHandLandmarks) {
-      drawConnectors(canvasCtx, landmarks, HAND_CONNECTIONS,
-                     {color: '#00FF00', lineWidth: 5});
-      drawLandmarks(canvasCtx, landmarks, {color: '#FF0000', lineWidth: 2});
-    }
-  }
-  canvasCtx.restore();
+function setup() {
+    createCanvas(w, h);
+    background(255, 200, 200);
+    //noStroke();
+    strokeWeight(10);
 }
 
-const hands = new Hands({locateFile: (file) => {
-  return `https://cdn.jsdelivr.net/npm/@mediapipe/hands/${file}`;
-}});
-hands.setOptions({
-  maxNumHands: 2,
-  modelComplexity: 1,
-  minDetectionConfidence: 0.5,
-  minTrackingConfidence: 0.5
-});
-hands.onResults(onResults);
+function draw() {
 
-const camera = new Camera(videoElement, {
-  onFrame: async () => {
-    await hands.send({image: videoElement});
-  },
-  width: 640,
-  height: 480
-});
-camera.start();
+    clear(); // comment this out if you want to draw to the screen
+
+    if (detections.multiHandLandmarks !== undefined) {
+
+        // draw all keypoints for any visible hands
+        for (const hand of detections.multiHandLandmarks) {
+            for (let i = 0; i < hand.length; i++) {
+                stroke(255, 0, 0);
+                // we need to multiply the x and y positions by width and height
+                // to scale the landmarks to our canvas
+                point(hand[i].x * w, hand[i].y * h);
+            }
+        }
+
+        // if both hands are detected, then draw them both using different colors
+        if (detections.multiHandLandmarks.length > 1) {
+            
+            // store the left and right hands in their own variables
+            let leftHand, rightHand;
+            if(detections.multiHandedness[0].label == "Left") {
+                leftHand = detections.multiHandLandmarks[1];
+                rightHand = detections.multiHandLandmarks[0];
+            } else {
+                leftHand = detections.multiHandLandmarks[0];
+                rightHand = detections.multiHandLandmarks[1];
+            }
+
+            // loop through the hand landmarks
+            for (let i = 0; i < leftHand.length; i++) {
+                
+                // draw the left hand in green
+                stroke(0, 255, 0);
+                point(leftHand[i].x * w, leftHand[i].y * h);
+                
+
+                // draw the right hand in blue
+                stroke(0, 0, 255);
+                point(rightHand[i].x * w, rightHand[i].y * h);
+
+                push()
+                noStroke();
+                    fill(255, 0, 0);
+                    
+                    text(i, leftHand[i].x * w, leftHand[i].y * h)
+                    text(i, rightHand[i].x * w, rightHand[i].y * h)
+                pop();
+            }
+        }
+    } else {
+        clear();
+    }
+
+
+}
