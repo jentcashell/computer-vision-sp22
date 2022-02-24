@@ -15,6 +15,6 @@ function draw() {
   push();
     translate(w, 0);
     scale(-1, 1);
-    image(capture, 0, 0);
+     image(capture, 0, 0, capture.width, capture.height);
   pop();
 }
