@@ -10,6 +10,7 @@ const FACE_OVAL = [10, 338, 297, 332, 284, 251, 389, 356, 454, 323, 361, 288, 39
 let facePixels = [];
 
 let mask;
+let faceOutput;
 let capture;
 
 function setup() {
@@ -23,31 +24,21 @@ function setup() {
     capture.hide();
 }
 
-// The MediaPipe library comes with useful built-in tools to easily draw
-// the landmarks and connections. If you want to debug with those, set
-// this to true. 
 let usingDrawingUtils = false; // false means you're using your own drawing solutions
 
 function draw() {
     clear();
     // don't start drawing until we have received results 
     if (detections !== undefined) {
-
         if (detections.faceLandmarks !== undefined) {
-            // for (let lm of detections.faceLandmarks) {
-            //     lm = createVector(lm.x * w, lm.y * h);
-            //     fill(255, 0, 255);
-            //     ellipse(lm.x, lm.y, 2, 2);
-            // }
+
+            // draw a green mask of the face silhouette to the mask.
             mask.fill(0, 255, 0);
             mask.noStroke();
             mask.beginShape()
             for (let i = 0; i < FACE_OVAL.length; i++) {
                 let lmIndex = FACE_OVAL[i];
-                //console.log(detections.faceLandmarks);
-
                 let lm = createVector(detections.faceLandmarks[lmIndex].x * w, detections.faceLandmarks[lmIndex].y * h)
-
                 mask.curveVertex(lm.x, lm.y);
             }
             mask.endShape(CLOSE)
@@ -55,6 +46,7 @@ function draw() {
             mask.loadPixels();
             capture.loadPixels();
 
+            // store the colors of each point of the face in the mask
             for(let _y = 0; _y < mask.height; _y++) {
                 for(let _x = 0; _x < mask.width; _x++) {
                     const i = (_x + _y * width) * 4;
@@ -67,21 +59,23 @@ function draw() {
                         const c = [capture.pixels[i], capture.pixels[i+1], capture.pixels[i+2]];
                         facePixels.push({x: _x, y: _y, color: c});
                     }
+                    // mask.pixels[i] = 255;
+                    // mask.pixels[i+1] = 255;
+                    // mask.pixels[i+2] = 255;
                 }
             }
 
-            // console.log(facePixels)
+            
 
+            // loop through all the stored pixels and update the pixels in faceOutput
             for(let p of facePixels) {
-                
                 const i = (p.x + p.y * width) * 4;
 
                 mask.pixels[i] = p.color[0];
                 mask.pixels[i+1] = p.color[1];
                 mask.pixels[i+2] = p.color[2];
-                // mask.stroke(p.color);
-                // mask.point(p.x, p.y);
             }
+            
             mask.updatePixels();
 
             image(mask, 0, 0);
