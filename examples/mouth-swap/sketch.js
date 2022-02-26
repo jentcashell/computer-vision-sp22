@@ -58,15 +58,19 @@ function draw() {
                     if(_r == 0 && _g == 255 && _b == 0) {
                         const c = [capture.pixels[i], capture.pixels[i+1], capture.pixels[i+2]];
                         facePixels.push({x: _x, y: _y, color: c});
+                    } else {
+                        // mask.pixels[i] = 0;
+                        // mask.pixels[i+1] = 0;
+                        // mask.pixels[i+2] = 0;
+                        mask.pixels[i+3] = 0;
                     }
                     // mask.pixels[i] = 255;
                     // mask.pixels[i+1] = 255;
                     // mask.pixels[i+2] = 255;
                 }
             }
-
-            
-
+            //mask.clear();
+            mask.updatePixels();
             // loop through all the stored pixels and update the pixels in faceOutput
             for(let p of facePixels) {
                 const i = (p.x + p.y * width) * 4;
