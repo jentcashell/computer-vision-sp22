@@ -42,8 +42,8 @@ if (videoFeed) {
     onFrame: async () => {
       await holistic.send({ image: videoElement });
     },
-    width: 640,
-    height: 480
+    width: 320,
+    height: 240
   });
   camera.start();
 } else {
