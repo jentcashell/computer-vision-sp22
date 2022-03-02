@@ -13,3 +13,10 @@ https://blog.tensorflow.org/2021/08/3d-pose-detection-with-mediapipe-blazepose-g
 
 <!-- Optional: Include below scripts if you want to use MediaPipe runtime. -->
 <script src="https://cdn.jsdelivr.net/npm/@mediapipe/pose"></script>
+
+
+// Hand detection
+<script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/control_utils/control_utils.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils/drawing_utils.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands/hands.js" crossorigin="anonymous"></script>
